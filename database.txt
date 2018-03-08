@@ -1,0 +1,24 @@
+create database indexer
+default character set utf8
+default collate utf8_general_ci;
+
+create table words(
+    id int(30) auto_increment primary key,
+    word varchar(50) unique
+);
+
+create table pages(
+    id int(4) auto_increment primary key,
+    link varchar(100)  unique,
+    data varchar(100)  unique,
+    video tinyint(1) default 0,
+    image tinyint(1) default 0
+);
+create table word_page(
+    id int(100) auto_increment primary key,
+    word_id int(30),
+    page_id int(10),
+    position int(10),
+    foreign key(word_id) references words(id) on delete cascade,
+    foreign key(page_id) references pages(id) on delete cascade
+);
